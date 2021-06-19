@@ -21,7 +21,7 @@ const issueSchema = mongoose.Schema({
 });
 
 issueSchema.pre("save", function (next) {
-  const now = new Date();
+  const now = new Date().toUTCString();
   this.updated_on = now;
   if (!this.created_on) {
     this.created_on = now;
