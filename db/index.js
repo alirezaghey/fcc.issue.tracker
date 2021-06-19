@@ -20,7 +20,7 @@ const issueSchema = mongoose.Schema({
   updated_on: String,
 });
 
-issueSchema.pre("save", (next) => {
+issueSchema.pre("save", function (next) {
   const now = new Date();
   this.updated_on = now;
   if (!this.created_on) {
