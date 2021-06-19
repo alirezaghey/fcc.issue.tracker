@@ -23,8 +23,8 @@ module.exports = function (app) {
     .post(function (req, res) {
       let project = req.params.project;
       const newIssue = { project };
-      for (el in req.params.query) {
-        newIssue[el] = req.query[el];
+      for (const el in req.body) {
+        newIssue[el] = req.body[el];
       }
       if (!checkRequiredFields(newIssue))
         return res.json({ error: "required field(s) missing" });
@@ -48,14 +48,7 @@ module.exports = function (app) {
 };
 
 const checkRequiredFields = (obj) => {
-  if (
-    !obj.issue_title ||
-    !obj.issue_text ||
-    !obj.created_by ||
-    !obj.assigned_to ||
-    !obj.status_text ||
-    !obj.project
-  )
+  if (!obj.issue_title || !obj.issue_text || !obj.created_by || !obj.project)
     return false;
   return true;
 };
