@@ -20,6 +20,15 @@ const issueSchema = mongoose.Schema({
   updated_on: String,
 });
 
+issueSchema.pre("save", (next) => {
+  const now = new Date();
+  this.updated_on = now;
+  if (!this.created_on) {
+    this.created_on = now;
+  }
+  next();
+});
+
 let Issue = mongoose.model("Issue", issueSchema);
 
 const createIssue = (args, done) => {
@@ -29,7 +38,19 @@ const createIssue = (args, done) => {
     return done(null, data);
   });
 };
-const updateIssue = (id, args, done) => {};
+const updateIssue = (id, args, done) => {
+  findById(id, (err, data) => {
+    if (err) return done(true);
+    if (!data) return done(true);
+    for (const arg in args) {
+      data[arg] = args[arg];
+    }
+    Issue.findByIdAndUpdate(id, args, (err, data) => {
+      if (err) return done(err);
+      return done(null, data);
+    });
+  });
+};
 
 const findIssues = (args, done) => {
   Issue.find(args, (err, data) => {
