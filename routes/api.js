@@ -41,7 +41,7 @@ module.exports = function (app) {
     .put(function (req, res) {
       let project = req.params.project;
       const updateObj = { project };
-      for (el in req.body) {
+      for (const el in req.body) {
         updateObj[el] = req.body[el];
       }
       if (!updateObj._id) return res.json({ error: "missing _id" });
