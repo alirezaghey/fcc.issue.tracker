@@ -40,7 +40,7 @@ module.exports = function (app) {
 
     .put(function (req, res) {
       let project = req.params.project;
-      const updateObj = { project };
+      const updateObj = {};
       for (const el in req.body) {
         updateObj[el] = req.body[el];
       }
@@ -48,7 +48,7 @@ module.exports = function (app) {
       if (
         updateObj.open === undefined &&
         updateObj.issue_title === undefined &&
-        updateObj.issue_text == undefind &&
+        updateObj.issue_text == undefined &&
         updateObj.created_by === undefined &&
         updateObj.assigned_to === undefined &&
         updateObj.status_text === undefined
