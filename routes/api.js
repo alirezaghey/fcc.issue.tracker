@@ -47,7 +47,6 @@ module.exports = function (app) {
       if (!updateObj._id) return res.json({ error: "missing _id" });
       if (
         updateObj.open === undefined &&
-        updateObj.project === undefined &&
         updateObj.issue_title === undefined &&
         updateObj.issue_text == undefind &&
         updateObj.created_by === undefined &&
