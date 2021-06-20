@@ -59,7 +59,7 @@ module.exports = function (app) {
         });
       db.updateIssue(updateObj._id, updateObj, (err, data) => {
         if (err) {
-          return res.json({ error: "could not delete", _id: updateObj._id });
+          return res.json({ error: "could not update", _id: updateObj._id });
         }
         return res.json({ result: "successfully updated", _id: updateObj._id });
       });

@@ -8,26 +8,18 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-const issueSchema = mongoose.Schema({
-  project: String,
-  assigned_to: { type: String, default: "" },
-  status_text: { type: String, default: "" },
-  open: { type: Boolean, default: true },
-  issue_title: String,
-  issue_text: String,
-  created_by: String,
-  created_on: String,
-  updated_on: String,
-});
-
-issueSchema.pre("save", function (next) {
-  const now = new Date().toUTCString();
-  this.updated_on = now;
-  if (!this.created_on) {
-    this.created_on = now;
-  }
-  next();
-});
+const issueSchema = new mongoose.Schema(
+  {
+    project: String,
+    assigned_to: { type: String, default: "" },
+    status_text: { type: String, default: "" },
+    open: { type: Boolean, default: true },
+    issue_title: String,
+    issue_text: String,
+    created_by: String,
+  },
+  { timestamps: { createdAt: "created_on", updatedAt: "updated_on" } }
+);
 
 let Issue = mongoose.model("Issue", issueSchema);
 
