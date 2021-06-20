@@ -8,7 +8,7 @@ module.exports = function (app) {
     .get(function (req, res) {
       let project = req.params.project;
       const filter = { project };
-      for (const el in req.params.query) {
+      for (const el in req.query) {
         filter[el] = req.query[el];
       }
       db.findIssues(filter, (err, data) => {
