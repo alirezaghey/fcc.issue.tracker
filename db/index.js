@@ -15,6 +15,7 @@ const issueSchema = mongoose.Schema({
   open: { type: Boolean, default: true },
   issue_title: String,
   issue_text: String,
+  status_text: String,
   created_by: String,
   created_on: String,
   updated_on: String,
