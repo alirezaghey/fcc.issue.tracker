@@ -59,6 +59,15 @@ const findIssues = (args, done) => {
   });
 };
 
+const deleteById = (id, done) => {
+  Issue.findByIdAndRemove(id, (err, data) => {
+    if (err) {
+      console.log(err);
+      return done(true);
+    }
+    return done(false, data);
+  });
+};
 const findById = (id, done) => {
   // check if id is a valid mongodb id
   if (!mongoose.isValidObjectId(id)) return done(null, null);
@@ -68,4 +77,4 @@ const findById = (id, done) => {
   });
 };
 
-module.exports = { createIssue, updateIssue, findIssues };
+module.exports = { createIssue, updateIssue, findIssues, deleteById };

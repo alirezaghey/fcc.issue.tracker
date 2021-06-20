@@ -66,7 +66,16 @@ module.exports = function (app) {
     })
 
     .delete(function (req, res) {
-      let project = req.params.project;
+      const id = req.body._id;
+      if (!id) {
+        return res.json({ error: "missing _id" });
+      }
+      db.deleteById(id, (err, data) => {
+        if (err || !data) {
+          return res.json({ error: "could not delete", _id: id });
+        }
+        return res.json({ result: "successfully deleted", _id: id });
+      });
     });
 };
 
